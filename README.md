@@ -63,3 +63,4 @@ Future ideas
   * Photosynthesis
   * Creature groups (move in packs)
   * Sexual maturity age/longevity
+  * intelligence
