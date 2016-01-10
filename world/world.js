@@ -1,25 +1,20 @@
-var getTile = function(x, y) {
+var tick = function(map) {
+  console.log("tick");
+  console.log(map.width);
 };
 
-var initialize = function(width, height) {
-  var newMap = new Array(height);
-  for(var r = 0; r < height; ++r) {
-    newMap[r] = new Array(width);
-    for(var c = 0; c < width; ++c) {
-      newMap[r][c] = {
-        type: 'water',
-        creatures: []
-      };
-    }
+module.exports = function(width, height, numCreatures, tickLength) {
+  var map = require('./map')(width, height);
+  var creature = require('../creature/creature');
+
+  setInterval(tick, tickLength, map);
+
+  for(var ii = 0; ii < numCreatures; ++ii) {
+    map.addCreature(creature.newCreature(), parseInt(Math.random()*height),
+                   parseInt(Math.random()*width));
   }
-  return newMap;
-};
 
-module.exports = function(width, height) {
-  var tiles = initialize(width, height);
   return {
-    tile: function(r, c) {
-      return tiles[r][c];
-    }
-  };
-}
+    map: map
+  }
+};
